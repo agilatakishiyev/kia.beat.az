@@ -16,6 +16,10 @@ button {
     cursor: pointer;
 }
 
+button:disabled {
+    opacity: .5;
+}
+
 button:active {
     transform: translateY(2px);
 }
@@ -33,6 +37,11 @@ button:active {
 @font-face {
     src: url("../fonts/publico/Publico-Azerbaijan-Headline-Medium.otf");
     font-family: "fnt-1";
+}
+
+@font-face {
+    src: url("../fonts/publico/Publico\ Azerbaijan\ Headline-Medium\ Italic.otf");
+    font-family: "fnt-1-medium-italic";
 }
 
 @font-face {
@@ -102,6 +111,7 @@ body {
     border: 1px solid #c3c3c3;
     background-color: transparent;
     transition: .3s;
+    text-transform: capitalize;
 }
 
 .center__form input:focus {
@@ -150,6 +160,8 @@ body {
     transform: translate(-50%);
     transition: all 1s linear;
     text-align: center;
+    font-family: 'fnt-1-italic';
+    z-index: 9999999;
 }
 
 .generate.not-shown {
@@ -167,7 +179,6 @@ body {
 }
 
 .generate div {
-    font-family: 'fnt-1-italic';
     font-size: 40px;
     line-height: 60px;
 }
@@ -175,13 +186,11 @@ body {
 .generate .generate__button {
     font-family: 'fnt-2-bold';
     border-radius: 10px;
-    opacity: .5;
     padding: 16px 35px;
     margin-top: 60px;
 }
 
 footer {
-    width: 30%;
     font-family: "fnt-2-medium";
     font-size: 16px;
     text-align: center;
@@ -205,13 +214,13 @@ footer .footer__bottom-paragraph {
     font-family: "fnt-2-medium";
 }
 
-footer .footer__bottom-paragraph a {
+footer .footer__bottom-paragraph span {
     text-decoration: none;
     font-family: "fnt-2-bold";
     transition: all .3s;
 }
 
-footer .footer__bottom-paragraph a:hover {
+footer .footer__bottom-paragraph span:hover {
     opacity: .8;
 }
 
@@ -256,7 +265,6 @@ footer .footer__bottom-paragraph a:hover {
 
 .custom-select__trigger span {
     text-decoration: underline;
-    font-weight: bold;
 }
 
 .custom-options {
@@ -277,7 +285,7 @@ footer .footer__bottom-paragraph a:hover {
     opacity: 1;
     visibility: visible;
     pointer-events: all;
-    z-index: 999999;
+    border-radius: 10px;
 }
 
 .custom-option {
@@ -289,6 +297,16 @@ footer .footer__bottom-paragraph a:hover {
     z-index: 999999;
     font-size: 20px;
     line-height: 30px;
+}
+
+.custom-option:first-child {
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.custom-option:last-child {
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
 }
 
 .custom-option:hover {
@@ -306,21 +324,13 @@ footer .footer__bottom-paragraph a:hover {
     height: 15px;
     width: 15px;
     margin-left: 10px;
+    transition: all .3s;
 }
 
-.arrow::before,
-.arrow::after {
-    content: "";
-    position: absolute;
-    bottom: 0px;
-    width: 0.15rem;
-    height: 100%;
-    transition: all 0.5s;
+.arrow img {
+    transition: all 0.3s;
 }
 
-
-.open .arrow {
+.open .arrow img {
     transform: rotate(180deg);
-    transform-origin: 10px;
-    /* transform-origin: bottom; */
 }

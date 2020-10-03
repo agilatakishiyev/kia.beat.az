@@ -4,11 +4,13 @@ import { createConnection } from "typeorm";
 import { User } from './entities/User';
 
 createConnection({
-    type: 'postgres',
-    url: process.env.DATABASE_URL,
-    ssl: {
-        rejectUnauthorized: false
-    }
+    host: process.env.DATABASE_URL ? "" : "localhost",
+    type: "postgres",
+    username: "",
+    password: "",
+    database: process.env.DATABASE_URL ? "" : "kia",
+    port: process.env.DATABASE_URL ? 5432 : 5433,
+    url: process.env.DATABASE_URL
 }).then(async connection => {
     console.log('connected succeessfully to the db');
 
@@ -22,8 +24,8 @@ createConnection({
     app.set("views", "src/views");
 
     app.get('/', async (_, res) => {
-        // const generatedImagesTillNow = await connection.manager.query('SELECT all from generated_images');
-        // res.render('index', { generationCount: generatedImagesTillNow.length });
+        const generatedImagesTillNow = await connection.manager.query('SELECT all from generated_images');
+        res.render('index', { generationCount: generatedImagesTillNow.length });
         res.render('index', { generationCount: 5 });
     });
 

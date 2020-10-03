@@ -1,6 +1,9 @@
 window.addEventListener('DOMContentLoaded', (e) => {
-    console.log('document laoded');
+    let isNameInputFilled = false;
+    let isSurNameInputFilled = false;
     const mainForm = document.getElementById('main-form');
+    const nameInput = document.getElementById('name-input');
+    const surnameInput = document.getElementById('surname-input')
     const centerSection = document.querySelector('.center');
     const generateSection = document.querySelector('.generate');
     const currentUser = localStorage.getItem('user');
@@ -11,11 +14,28 @@ window.addEventListener('DOMContentLoaded', (e) => {
         generateSection.classList.remove('not-shown');
     }
 
+
+    function checkAndActivate () {
+        if(isNameInputFilled && isSurNameInputFilled) {
+            mainForm.querySelector("button[type='submit']").removeAttribute('disabled');
+            nameInput.onkeyup = null;
+            surnameInput.onkeyup = null;
+        }
+    }
+
+    nameInput.onkeyup = function () {
+        isNameInputFilled = true;
+        checkAndActivate();
+    }
+
+    surnameInput.onkeyup = function () {
+        isSurNameInputFilled = true;
+        checkAndActivate();
+    }
+
     mainForm.onsubmit = function (e) {
         e.preventDefault();
-        const name = document.getElementById('name-input').value;
-        const surname = document.getElementById('surname-input').value;
-        if(name && surname) {
+        if(nameInput.value && surnameInput.value) {
             fetch("new-user", {
                 method: 'POST',
                 headers: {
@@ -23,7 +43,7 @@ window.addEventListener('DOMContentLoaded', (e) => {
                     'Content-Type': 'application/json'
                 },
                 credentials: 'same-origin',
-                body: JSON.stringify({name, surname}),
+                body: JSON.stringify({name: nameInput.value, surname: surnameInput.value}),
             })
             .then(res => res.json())
             .then(res => {
@@ -43,13 +63,16 @@ window.addEventListener('DOMContentLoaded', (e) => {
         this.querySelector('.custom-select').classList.toggle('open');
     });
 
+    const generateButton = document.querySelector('.generate__button');
+
     for (const option of document.querySelectorAll(".custom-option")) {
         option.addEventListener('click', function() {
             if (!this.classList.contains('selected')) {
-                this.parentNode.querySelector('.custom-option.selected').classList.remove('selected');
+                this.parentNode.querySelector('.custom-option.selected')?.classList.remove('selected');
                 this.classList.add('selected');
                 this.closest('.custom-select').querySelector('.custom-select__trigger span').textContent = this.textContent;
             }
+            generateButton.removeAttribute('disabled');
         })
     }
 
