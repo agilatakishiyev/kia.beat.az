@@ -2,6 +2,7 @@ import "reflect-metadata"
 import express from "express";
 import { createConnection } from "typeorm";
 import { User } from './entities/User';
+import { GeneratedImage } from "./entities/Generated_Image";
 
 createConnection({
     type: 'postgres',
@@ -19,7 +20,8 @@ createConnection({
     app.set("views", "src/views");
 
     app.get('/', async (_, res) => {
-        const generatedImagesTillNow = await connection.manager.query('SELECT all from generated_images');
+        await connection.manager.create(GeneratedImage);
+        const generatedImagesTillNow = await connection.manager.find(GeneratedImage);
         res.render('index', { generationCount: generatedImagesTillNow.length });
         res.render('index', { generationCount: 5 });
     });
