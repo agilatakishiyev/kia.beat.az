@@ -6,7 +6,11 @@ import { GeneratedImage } from "./entities/Generated_Image";
 
 createConnection({
     type: 'postgres',
-    url: process.env.DATABASE_URL
+    url: process.env.DATABASE_URL,
+    entities: [
+        User,
+        GeneratedImage
+    ]
 }).then(async connection => {
     console.log('connected succeessfully to the db');
 
@@ -20,7 +24,6 @@ createConnection({
     app.set("views", "src/views");
 
     app.get('/', async (_, res) => {
-        await connection.manager.create(GeneratedImage);
         const generatedImagesTillNow = await connection.manager.find(GeneratedImage);
         res.render('index', { generationCount: generatedImagesTillNow.length });
         res.render('index', { generationCount: 5 });
