@@ -3,7 +3,13 @@ import express from "express";
 import { createConnection } from "typeorm";
 import { User } from './entities/User';
 
-createConnection().then(async connection => {
+createConnection({
+    type: 'postgres',
+    url: process.env.DATABASE_URL,
+    ssl: {
+        rejectUnauthorized: false
+    }
+}).then(async connection => {
     console.log('connected succeessfully to the db');
 
     const app = express();
