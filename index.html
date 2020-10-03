@@ -1,0 +1,104 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./assets/css/style.css">
+    <title>Test app</title>
+</head>
+
+<body>
+    <header class="header flex">
+        <span>Shared histories: <span style="font-weight: bold;">3</span></span>
+        <span class="flex">
+            Social share
+            <a href="#share-fb" style="padding: 10px; margin-left: 10px;" class="share-icon">
+                <svg width="11px" height="23px" viewBox="0 0 11 23" version="1.1" xmlns="http://www.w3.org/2000/svg"
+                    xmlns:xlink="http://www.w3.org/1999/xlink">
+                    <title>Facebook</title>
+                    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                        <g id="District-selected" transform="translate(-1272.000000, -150.000000)" fill="#000000">
+                            <path
+                                d="M1279.31471,173 L1274.43724,173 L1274.43724,161.498548 L1272,161.498548 L1272,157.535534 L1274.43724,157.535534 L1274.43724,155.156274 C1274.43724,151.923441 1275.81271,150 1279.72302,150 L1282.97765,150 L1282.97765,153.964466 L1280.94351,153.964466 C1279.42126,153.964466 1279.32067,154.518272 1279.32067,155.551849 L1279.31396,157.535534 L1283,157.535534 L1282.56858,161.498548 L1279.31396,161.498548 L1279.31396,173 L1279.31471,173 Z"
+                                id="Facebook"></path>
+                        </g>
+                    </g>
+                </svg>
+            </a>
+            <a href="#share-twitter" style="padding: 10px;" class="share-icon">
+                <svg width="21px" height="18px" viewBox="0 0 21 18" version="1.1" xmlns="http://www.w3.org/2000/svg"
+                    xmlns:xlink="http://www.w3.org/1999/xlink">
+                    <title>Twitter</title>
+                    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                        <g id="District-selected" transform="translate(-1299.000000, -153.000000)" fill="#000000">
+                            <path
+                                d="M1317.52615,155.845732 C1318.41609,155.284125 1319.09896,154.393615 1319.41944,153.332804 C1318.58619,153.854109 1317.66543,154.231114 1316.68304,154.435216 C1315.8991,153.551206 1314.77866,153 1313.53865,153 C1311.15971,153 1309.23191,155.034523 1309.23191,157.54355 C1309.23191,157.899754 1309.26765,158.246858 1309.34161,158.578362 C1305.76211,158.38856 1302.58813,156.58154 1300.46188,153.830709 C1300.09086,154.504117 1299.87885,155.284125 1299.87885,156.116135 C1299.87885,157.691752 1300.63937,159.082768 1301.79556,159.899177 C1301.08928,159.875776 1300.4249,159.669074 1299.84311,159.33107 L1299.84311,159.386971 C1299.84311,161.589195 1301.32717,163.426116 1303.30058,163.84212 C1302.93819,163.948722 1302.55855,164.002022 1302.16411,164.002022 C1301.88678,164.002022 1301.6156,163.974722 1301.35429,163.921421 C1301.90157,165.725841 1303.49287,167.041456 1305.37876,167.076556 C1303.90333,168.29597 1302.04578,169.021378 1300.028,169.021378 C1299.6804,169.021378 1299.3365,169.001878 1299,168.958977 C1300.90685,170.247292 1303.17116,171 1305.60433,171 C1313.53002,171 1317.86142,164.076123 1317.86142,158.071356 C1317.86142,157.873754 1317.85895,157.677452 1317.85033,157.48375 C1318.6922,156.842843 1319.42437,156.042034 1320,155.130724 C1319.22715,155.492128 1318.39637,155.73653 1317.52615,155.845732 Z"
+                                id="Twitter"></path>
+                        </g>
+                    </g>
+                </svg>
+            </a>
+        </span>
+    </header>
+    <section class="center">
+        <span class="center__flag">
+            <img src="./assets/images/az_flag.svg" alt="Azerbaijan flag">
+        </span>
+        <span class="center__karabakh-text purple">
+            #KarabakhisAzerbaijan
+        </span>
+        <form id="main-form" class="center__form flex">
+            <input type="text" placeholder="Name" autocomplete="off" id="name-input">
+            <input type="text" placeholder="Surname" autocomplete="off" id="surname-input" style="margin-left: 23px;">
+            <button type="submit"
+                style="margin-left: 43px;display: flex; align-items: center; justify-content: center;">
+                <span style="margin-right: 5px;">Next</span>
+                <img src="./assets/images/arrow-right.svg" alt="arrow right">
+            </button>
+        </form>
+    </section>
+    <section class="generate not-shown">
+        <h1>Hello World!</h1>
+        <div>I’m from
+            <div class="custom-select-wrapper">
+                <div class="custom-select">
+                    <div class="custom-select__trigger"><span>Choose district</span>
+                        <div class="arrow">
+                            <img src="./assets/images/arrow-down.svg" alt="">
+                        </div>
+                    </div>
+                    <div class="custom-options">
+                        <span class="custom-option" data-value="Aghdara">Aghdara</span>
+                        <span class="custom-option" data-value="Aghdam">Aghdam</span>
+                        <span class="custom-option" data-value="Fuzuli">Fuzuli</span>
+                        <span class="custom-option" data-value="Zangilan">Zangilan</span>
+                        <span class="custom-option" data-value="Jabrayil">Jabrayil</span>
+                        <span class="custom-option" data-value="Gubadli">Gubadli</span>
+                        <span class="custom-option" data-value="Khojavend">Khojavend</span>
+                        <span class="custom-option" data-value="Khojaly">Khojaly</span>
+                        <span class="custom-option" data-value="Shusha">Shusha</span>
+                        <span class="custom-option" data-value="Lachin">Lachin</span>
+                        <span class="custom-option" data-value="Kalbajar">Kalbajar</span>
+                    </div>
+                </div>
+            </div> and my territory is occupied by Armenia.
+        </div>
+        <button class="generate__button">Generate</button>
+    </section>
+
+    <footer>
+        <a href="https://beat.az/" target="_blank" class="footer__beat-logo">
+            <img src="./assets/images/beat-group-logo.svg" alt="Beat group logo">
+        </a>
+        <p>
+            Free for commercial and personal use under <a href="#salam">CC0 license.
+                Any ideas? Drop an mail</a>
+        </p>
+        <p class="footer__bottom-paragraph">Share your history with <span class="purple">#KarabakhisAzerbaijan</span>
+        </p>
+    </footer>
+
+    <script src="./assets/js/main.js"></script>
+</body>
+
+</html>

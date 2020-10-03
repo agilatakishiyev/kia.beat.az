@@ -1,0 +1,24 @@
+{
+    "type": "postgres",
+    "host": "localhost",
+    "port": 5432,
+    "username": "beatkarabakh",
+    "password": "7M4~ajs9",
+    "database": "Mirza_karabakh",
+    "synchronize": true,
+    "logging": false,
+    "entities": [
+        "./entities/*.ts"
+    ],
+    "migrations": [
+        "./migration/*.ts"
+    ],
+    "subscribers": [
+        "./subscriber/*.ts"
+    ],
+    "cli": {
+        "entitiesDir": "./entities",
+        "migrationsDir": "./migration",
+        "subscribersDir": "./subscriber"
+    }
+}
