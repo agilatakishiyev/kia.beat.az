@@ -16,6 +16,10 @@ button {
     cursor: pointer;
 }
 
+button:hover {
+    box-shadow: 0 10px 50px -10px #8675D9;
+}
+
 button:disabled {
     opacity: .5;
 }
@@ -311,7 +315,7 @@ footer .footer__bottom-paragraph span:hover {
 
 .custom-option:hover {
     cursor: pointer;
-    background-color: #b2b2b2;
+    background-color: #E5E5E5;
 }
 
 .custom-option.selected {
