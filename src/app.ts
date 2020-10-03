@@ -24,8 +24,7 @@ createConnection({
     app.set("views", "src/views");
 
     app.get('/', async (_, res) => {
-        const generatedImagesTillNow = await connection.manager.find(GeneratedImage);
-        res.render('index', { generationCount: generatedImagesTillNow.length });
+        // const generatedImagesTillNow = await connection.manager.find(GeneratedImage);
         res.render('index', { generationCount: 5 });
     });
 
