@@ -12,6 +12,7 @@ button {
     color: white;
     background-color: #5c4e9e;
     box-shadow: 0 10px 50px -4px #8675D9;
+    transition: box-shadow .3s;
     font-size: 18px;
     cursor: pointer;
 }
@@ -315,12 +316,13 @@ footer .footer__bottom-paragraph span:hover {
 
 .custom-option:hover {
     cursor: pointer;
-    background-color: #E5E5E5;
+    background-color: #5c4e9e;
+    color: #ffffff;
 }
 
 .custom-option.selected {
+    background-color: #5c4e9e;
     color: #ffffff;
-    background-color: black;
 }
 
 .arrow {
