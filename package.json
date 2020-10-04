@@ -8,7 +8,7 @@
         "start": "ts-node ./src/app.ts",
         "minify-css": "csso ./src/assets/css/style.css --output ./src/assets/css/style.min.css",
         "minify-js": "uglifyjs ./src/assets/js/main.js -o ./src/assets/js/main.min.js",
-        "build": "npm run minify-js && npm run minify-css && tsc -p .",
+        "build": "tsc -p .",
         "tsc": "tsc"
     },
     "dependencies": {
