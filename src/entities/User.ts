@@ -1,4 +1,6 @@
-import { Entity, PrimaryGeneratedColumn, Column } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, OneToOne, JoinColumn } from "typeorm";
+import { Image } from './Image';
+
 
 @Entity()
 export class User {
@@ -10,4 +12,8 @@ export class User {
 
     @Column()
     surname!: string;
+
+    @OneToOne(type => Image)
+    @JoinColumn()
+    image: Image;
 }

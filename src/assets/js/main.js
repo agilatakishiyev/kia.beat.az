@@ -1,6 +1,7 @@
-window.addEventListener('DOMContentLoaded', (e) => {
+window.addEventListener('DOMContentLoaded', function () {
     let isNameInputFilled = false;
     let isSurNameInputFilled = false;
+    let sendingRequest = false;
     const mainForm = document.getElementById('main-form');
     const nameInput = document.getElementById('name-input');
     const surnameInput = document.getElementById('surname-input')
@@ -9,6 +10,7 @@ window.addEventListener('DOMContentLoaded', (e) => {
     const currentUser = localStorage.getItem('user');
 
     if(currentUser) {
+        document.querySelector('.generate__button__open-image-text').setAttribute('href', `/get-image/${JSON.parse(currentUser).userID}`)
         mainForm.classList.add('d-none');
         centerSection.classList.add('to-top');
         generateSection.classList.remove('not-shown');
@@ -33,6 +35,12 @@ window.addEventListener('DOMContentLoaded', (e) => {
         checkAndActivate();
     }
 
+    function capitalizeFirstLetter(string) {
+        if(typeof string==undefined) return;
+        var firstLetter = string[0] || string.charAt(0);
+        return firstLetter  ? firstLetter.toUpperCase() + string.substr(1) : '';
+     }
+
     mainForm.onsubmit = function (e) {
         e.preventDefault();
         if(nameInput.value && surnameInput.value) {
@@ -43,11 +51,12 @@ window.addEventListener('DOMContentLoaded', (e) => {
                     'Content-Type': 'application/json'
                 },
                 credentials: 'same-origin',
-                body: JSON.stringify({name: nameInput.value, surname: surnameInput.value}),
+                body: JSON.stringify({name: capitalizeFirstLetter(nameInput.value), surname: capitalizeFirstLetter(surnameInput.value)}),
             })
             .then(res => res.json())
             .then(res => {
                 if(res) {
+                    document.querySelector('.generate__button__open-image-text').setAttribute('href', `/get-image/${res.userID}`)
                     localStorage.setItem('user', JSON.stringify(res));
                     mainForm.classList.add('d-none');
                     centerSection.classList.add('to-top');
@@ -64,15 +73,49 @@ window.addEventListener('DOMContentLoaded', (e) => {
     });
 
     const generateButton = document.querySelector('.generate__button');
+    const generateButtonLoader = generateButton.querySelector('.loadingio-spinner-rolling-mu8b1dshy5');
+    generateButton.onclick = function () {
+        if(generateButton.querySelector('.generate__button__open-image-text').classList.contains('d-none')){
+            generateButton.querySelector('.generate__button__text').classList.add('d-none');
+            generateButtonLoader.classList.remove('d-none');
+            const user  = JSON.parse(localStorage.getItem('user'));
+            const city = document.querySelector(".custom-option.selected").getAttribute("data-value");
+            if (!sendingRequest) {
+                sendingRequest = true;
+                fetch("generate", {
+                    method: 'POST',
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    },
+                    credentials: 'same-origin',
+                    body: JSON.stringify({
+                        user,
+                        city
+                    })
+                })
+                .then(res => {
+                    generateButtonLoader.classList.add('d-none');
+                    generateButton.querySelector(".generate__button__open-image-text").classList.remove("d-none");
+                });
+            }
+        }
+    }
+
 
     for (const option of document.querySelectorAll(".custom-option")) {
         option.addEventListener('click', function() {
             if (!this.classList.contains('selected')) {
-                this.parentNode.querySelector('.custom-option.selected')?.classList.remove('selected');
+                if(this.parentNode.querySelector('.custom-option.selected')) {
+                    this.parentNode.querySelector('.custom-option.selected').classList.remove('selected');
+                }
                 this.classList.add('selected');
                 this.closest('.custom-select').querySelector('.custom-select__trigger span').textContent = this.textContent;
             }
             generateButton.removeAttribute('disabled');
+            generateButton.querySelector('.generate__button__text').classList.remove('d-none');
+            generateButton.querySelector('.generate__button__open-image-text').classList.add('d-none');
+            sendingRequest = false;
         })
     }
 
@@ -83,3 +126,8 @@ window.addEventListener('DOMContentLoaded', (e) => {
         }
     });
 });
+
+window.onload = function () {
+    const loadingWrapper = document.querySelector('.loading-wrapper');
+    loadingWrapper.classList.add('d-none');
+}
