@@ -2,7 +2,7 @@ import "reflect-metadata"
 import express from "express";
 import { createConnection } from "typeorm";
 import { User } from './entities/User';
-import { GeneratedImage } from "./entities/Generated_Image";
+import { GeneratedImage } from "./entities/GeneratedImage";
 
 createConnection({
     type: 'postgres',
@@ -15,10 +15,8 @@ createConnection({
     entities: [
         User,
         GeneratedImage
-    ],
-    migrationsRun: true
+    ]
 }).then(async connection => {
-    console.log('connected succeessfully to the db');
 
     const app = express();
     app.use(express.json({
