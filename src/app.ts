@@ -15,7 +15,8 @@ createConnection({
     entities: [
         User,
         GeneratedImage
-    ]
+    ],
+    migrationsRun: true
 }).then(async connection => {
     console.log('connected succeessfully to the db');
 
