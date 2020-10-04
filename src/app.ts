@@ -10,7 +10,8 @@ createConnection({
     entities: [
         User,
         Image
-    ]
+    ],
+    migrationsRun: true
 }).then(async connection => {
 
     const app = express();
