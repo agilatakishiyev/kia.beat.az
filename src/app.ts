@@ -7,6 +7,11 @@ import { GeneratedImage } from "./entities/Generated_Image";
 createConnection({
     type: 'postgres',
     url: process.env.DATABASE_URL,
+    // port: 5432,
+    // host: "localhost",
+    // username: "",
+    // password: "",
+    // database: "kia",
     entities: [
         User,
         GeneratedImage
@@ -24,8 +29,8 @@ createConnection({
     app.set("views", "src/views");
 
     app.get('/', async (_, res) => {
-        // const generatedImagesTillNow = await connection.manager.find(GeneratedImage);
-        res.render('index', { generationCount: 5 });
+        const generatedImagesTillNow = await connection.manager.find(GeneratedImage);
+        res.render('index', { generationCount: generatedImagesTillNow.length });
     });
 
     app.post('/new-user', (req, res) => {
