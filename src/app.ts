@@ -2,23 +2,18 @@ import "reflect-metadata"
 import express from "express";
 import { createConnection } from "typeorm";
 import { User } from './entities/User';
-import { GeneratedImage } from "./entities/GeneratedImage";
+import { Image } from "./entities/Image";
 
 createConnection({
     type: 'postgres',
     url: process.env.DATABASE_URL,
-    // port: 5432,
-    // host: "localhost",
-    // username: "",
-    // password: "",
-    // database: "kia",
     entities: [
         User,
-        GeneratedImage
+        Image
     ]
 }).then(async connection => {
 
-    connection.manager.insert(GeneratedImage, {
+    connection.manager.insert(Image, {
         date: Date.now(),
         image: 'test'
     });
@@ -33,11 +28,11 @@ createConnection({
     app.set("views", "src/views");
 
     app.get('/', async (_, res) => {
-        connection.manager.find(GeneratedImage).then(generatedImages => {
+        connection.manager.find(Image).then(generatedImages => {
             res.render('index', { generationCount: generatedImages.length });
         }).catch(err => {
             console.log(err);
-        })
+        });
     });
 
     app.post('/new-user', (req, res) => {
