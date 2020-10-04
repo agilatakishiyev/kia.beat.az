@@ -13,11 +13,6 @@ createConnection({
     ]
 }).then(async connection => {
 
-    connection.manager.insert(Image, {
-        date: Date.now(),
-        image: 'test'
-    });
-
     const app = express();
     app.use(express.json({
         type: 'application/json'
@@ -28,6 +23,10 @@ createConnection({
     app.set("views", "src/views");
 
     app.get('/', async (_, res) => {
+        connection.manager.insert(Image, {
+            date: Date.now(),
+            image: 'test'
+        });
         connection.manager.find(Image).then(generatedImages => {
             res.render('index', { generationCount: generatedImages.length });
         }).catch(err => {
