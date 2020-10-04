@@ -16,7 +16,6 @@
         "@types/express": "^4.17.8",
         "@types/node": "^14.11.2",
         "@types/pg": "^7.14.5",
-        "@types/puppeteer": "^3.0.2",
         "@types/uuid": "^8.3.0",
         "body-parser": "^1.19.0",
         "csso": "^4.0.3",
@@ -33,7 +32,9 @@
         "uglify-es": "^3.3.9",
         "uuid": "^8.3.1"
     },
-    "devDependencies": {},
+    "devDependencies": {
+        "@types/puppeteer": "3.0.2"
+    },
     "keywords": [],
     "author": "",
     "license": "ISC"
