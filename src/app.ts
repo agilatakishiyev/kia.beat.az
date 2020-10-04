@@ -33,8 +33,11 @@ createConnection({
     app.set("views", "src/views");
 
     app.get('/', async (_, res) => {
-        const generatedImagesTillNow = await connection.manager.find(GeneratedImage);
-        res.render('index', { generationCount: generatedImagesTillNow.length });
+        connection.manager.find(GeneratedImage).then(generatedImages => {
+            res.render('index', { generationCount: generatedImages.length });
+        }).catch(err => {
+            console.log(err);
+        })
     });
 
     app.post('/new-user', (req, res) => {
