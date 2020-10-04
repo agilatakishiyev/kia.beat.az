@@ -1,8 +1,19 @@
 import "reflect-metadata"
 import express from "express";
-import { createConnection } from "typeorm";
+import { Connection, createConnection } from "typeorm";
 import { User } from './entities/User';
 import { Image } from "./entities/Image";
+
+async function getImagesCount (connection: Connection): Promise<number> {
+    try {
+        const images = await connection.manager.find(Image)
+        console.log(images.length);
+        return images.length;
+    } catch (error) {
+        console.error(error)
+        return 0;
+    }
+}
 
 createConnection({
     type: 'postgres',
@@ -24,15 +35,8 @@ createConnection({
     app.set("views", "src/views");
 
     app.get('/', async (_, res) => {
-        connection.manager.insert(Image, {
-            date: Date.now(),
-            image: 'test'
-        });
-        connection.manager.find(Image).then(generatedImages => {
-            res.render('index', { generationCount: generatedImages.length });
-        }).catch(err => {
-            console.log(err);
-        });
+        const count = await getImagesCount(connection);
+        res.render('index', { generationCount: count });
     });
 
     app.post('/new-user', (req, res) => {
