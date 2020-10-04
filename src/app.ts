@@ -6,7 +6,7 @@ import { Image } from "./entities/Image";
 import { v4 as uuidv4 } from 'uuid';
 import ejs from "ejs";
 import fs from "fs";
-import nodeHtmlToImage from "node-html-to-image";
+const nodeHtmlToImage = require("node-html-to-image");
 
 async function getImagesCount (connection: Connection): Promise<number> {
     try {
