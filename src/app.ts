@@ -18,6 +18,11 @@ createConnection({
     ]
 }).then(async connection => {
 
+    connection.manager.insert(GeneratedImage, {
+        date: Date.now(),
+        image: 'test'
+    });
+
     const app = express();
     app.use(express.json({
         type: 'application/json'
