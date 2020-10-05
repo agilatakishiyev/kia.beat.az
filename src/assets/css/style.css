@@ -65,10 +65,17 @@ body {
 
 .header {
     width: 76%;
-    padding-top: 150px;
     margin: 0 auto;
     font-family: "fnt-1-italic";
     font-size: 18px;
+}
+
+@media only screen and (max-width: 600px) {
+    .header {
+        position: relative;
+        left: 0;
+        margin-bottom: 40px;
+    }
 }
 
 @media only screen and (max-width: 1050px) {
@@ -112,10 +119,10 @@ body {
     top: 8%;
 }
 
-
 @media only screen and (max-width: 600px) {
     .center.to-top {
         top: initial;
+        bottom: initial;
     }
 }
 
@@ -130,7 +137,7 @@ body {
     font-family: "fnt-1-roman";
 }
 
-@media only screen and (max-width: 500px) {
+@media only screen and (max-width: 600px) {
     .center__form {
         flex-direction: column;
         width: initial;
@@ -143,7 +150,7 @@ body {
     }
 }
 
-.center__form>* {
+.center__form > * {
     border-radius: 10px;
 }
 
@@ -175,7 +182,7 @@ body {
     cursor: pointer;
 }
 
-.center>span {
+.center > span {
     display: block;
 }
 
@@ -198,8 +205,11 @@ body {
 .center .center__karabakh-text {
     font-family: "fnt-1";
     font-size: 40px;
-    font-weight: medium;
     margin-bottom: 43px;
+}
+
+.center.to-top .center__karabakh-text {
+    margin-bottom: 0;
 }
 
 @media only screen and (max-width: 600px) {
@@ -213,7 +223,7 @@ body {
     display: block;
     opacity: 1;
     position: fixed;
-    top: 33%;
+    top: 30%;
     left: 50%;
     transform: translate(-50%);
     transition: all 1s linear;
@@ -248,18 +258,18 @@ body {
 
 @media only screen and (max-width: 600px) {
     .generate h1 {
+        margin-top: 40px;
         font-size: 40px;
         letter-spacing: -1px;
     }
 }
 
-
-.generate>div {
+.generate > div {
     margin-top: 40px;
 }
 
 @media only screen and (max-width: 600px) {
-    .generate>div {
+    .generate > div {
         margin-top: 20px;
     }
 }
@@ -282,11 +292,10 @@ body {
     border-radius: 10px;
     width: 150px;
     height: 53px;
-    margin-top: 60px;
+    margin-top: 40px;
 }
 
 @media only screen and (max-width: 600px) {
-
     .generate .generate__button,
     #download {
         margin-top: 30px;
@@ -333,7 +342,7 @@ footer .footer__beat-logo {
     margin-bottom: 26px;
 }
 
-footer>p>a {
+footer a {
     color: black;
 }
 

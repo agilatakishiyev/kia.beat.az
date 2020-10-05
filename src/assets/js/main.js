@@ -7,7 +7,7 @@ window.addEventListener('DOMContentLoaded', function () {
     const surnameInput = document.getElementById('surname-input')
     const centerSection = document.querySelector('.center');
     const generateSection = document.querySelector('.generate');
-    const currentUser = localStorage.getItem('user');
+    const currentUser = sessionStorage.getItem('user');
 
     if(currentUser) {
         document.querySelector('.generate__button__open-image-text').setAttribute('data-file-link', `/get-image/${JSON.parse(currentUser).userID}`)
@@ -57,7 +57,7 @@ window.addEventListener('DOMContentLoaded', function () {
             .then(res => {
                 if(res) {
                     document.querySelector('.generate__button__open-image-text').setAttribute('href', `/get-image/${res.userID}`)
-                    localStorage.setItem('user', JSON.stringify(res));
+                    sessionStorage.setItem('user', JSON.stringify(res));
                     mainForm.classList.add('d-none');
                     centerSection.classList.add('to-top');
                     generateSection.classList.remove('not-shown');
@@ -78,7 +78,7 @@ window.addEventListener('DOMContentLoaded', function () {
         if(document.getElementById('download').classList.contains('d-none')){
             generateButton.querySelector('.generate__button__text').classList.add('d-none');
             generateButtonLoader.classList.remove('d-none');
-            const user  = JSON.parse(localStorage.getItem('user'));
+            const user  = JSON.parse(sessionStorage.getItem('user'));
             const city = document.querySelector(".custom-option.selected").getAttribute("data-value");
             if (!sendingRequest) {
                 sendingRequest = true;
@@ -138,30 +138,39 @@ window.addEventListener('DOMContentLoaded', function () {
         document.getElementById('download').querySelector('.save-loader').classList.add('d-none');
     }
       
-    function download(file, callback) {
-        var request = new XMLHttpRequest();
-        request.responseType = 'json';
-        setTimeout(() => {
-            log();
-        }, 1000);
-        request.open('GET', file);
-        request.addEventListener('load', function () {
-            callback(request.response);
-        });
-        request.send();
-    }
+    // function download(file, callback) {
+    //     var request = new XMLHttpRequest();
+    //     request.responseType = 'json';
+    //     request.open('GET', file);
+    //     request.addEventListener('load', function () {
+    //         callback(request.response);
+    //     });
+    //     request.send();
+    // }
       
-    function save(object, mime, name) {
-        var a = document.createElement('a');
-        a.href = `data:image/png;base64,${object}`;
-        a.download = name;
-        a.click();
-    }
+    // function save(object, name) {
+    //     var a = document.createElement('a');
+    //     a.href = `data:image/jpg;base64,${object}`;
+    //     a.download = name;
+    //     a.click();
+    //     setTimeout(
+    //         () => {
+    //             log();
+    //         }, 
+    //         3000
+    //     );
+    // }
       
     document.querySelector('#download').addEventListener('click', function () {
-        download(`get-image/${JSON.parse(localStorage.getItem('user')).userID}`, function (response) {
-            save(response.image, null, response.name);
-        });
+        
+        var a = document.createElement('a');
+        a.href = `/get-image/${JSON.parse(sessionStorage.getItem('user')).userID}`;
+        a.setAttribute('download', 'true');
+        a.click();
+        log();
+        // download(`get-image/${JSON.parse(sessionStorage.getItem('user')).userID}`, function (response) {
+        //     save(response.image, response.name);
+        // });
     });
 });
 

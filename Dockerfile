@@ -50,7 +50,5 @@ RUN apt-get update && apt-get install -y \
 
 COPY . .
 
-COPY ./src/assets/fonts/gilroy/Gilroy-Medium.otf ~/fonts
-
 EXPOSE 3000
 CMD [ "npm", "start" ]

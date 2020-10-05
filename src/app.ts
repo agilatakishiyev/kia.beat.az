@@ -58,44 +58,53 @@ createConnection({
         user.surname = req.body.surname;
         const newUser = await userRepostiory.save(user);
 
-        res.setHeader('userID', newUser.id);
         res.send({ name: req.body.name, surname: req.body.surname, userID: newUser.id });
     });
 
     app.post('/generate', async (req, res) => {
         const data = req.body;
         const image = fs.readFileSync(`${__dirname}/assets/map_images/${data.city.toLowerCase()}.jpg`);
-        const base64Image = Buffer.from(image).toString('base64');
-        const imageURI = 'data:image/jpeg;base64,' + base64Image;
-        const html: string = await ejs.renderFile(`${__dirname}/assets/template.ejs`, { ...data, imageURI }, { async: true });
+        if (!Boolean(data.user.userID) || !Boolean(data.city)) {
+            res.status(404).send('not found image or user');
+            return;
+        }
+        if (image) {
+            const base64Image = Buffer.from(image).toString('base64');
+            const imageURI = 'data:image/jpeg;base64,' + base64Image;
+            const html: string = await ejs.renderFile(`${__dirname}/assets/template.ejs`, { ...data, imageURI }, { async: true });
 
-        const imageName = `${data.user.userID}-${uuidv4()}`;
+            const imageName = `${data.user.userID}-${uuidv4()}`;
 
-        nodeHtmlToImage({
-            output: `${__dirname}/assets/generated_images/${imageName}.jpg`,
-            html,
-            puppeteerArgs: {
-                args: [
-                    '--no-sandbox',
-                    '--disable-setuid-sandbox',
-                ]
-            }
-        }).then(async () => {
-            const newImage = new Image();
-            newImage.image = imageName;
-            newImage.date = new Date();
-            const imageRepository = connection.getRepository(Image);
-            await imageRepository.save(newImage);
-            const userRepostiory = connection.getRepository(User);
-
-            userRepostiory.findOne(data.user.userID).then(user => {
-                if (user) {
-                    user.image = newImage;
-                    userRepostiory.save(user);
+            nodeHtmlToImage({
+                output: `${__dirname}/assets/generated_images/${imageName}.jpg`,
+                html,
+                puppeteerArgs: {
+                    args: [
+                        '--no-sandbox',
+                        '--disable-setuid-sandbox',
+                    ]
                 }
+            }).then(async () => {
+                const newImage = new Image();
+                newImage.image = imageName;
+                newImage.date = new Date();
+                const imageRepository = connection.getRepository(Image);
+                await imageRepository.save(newImage);
+                const userRepostiory = connection.getRepository(User);
+
+                userRepostiory.findOne(data.user.userID).then(user => {
+                    if (user) {
+                        user.image = newImage;
+                        userRepostiory.save(user);
+                        res.download(`${__dirname}/assets/generated_images/${imageName}.jpg`);
+                    }
+                }).catch(err => {
+                    res.status(404).send(`not found ${err}`);
+                });
             });
-            res.download(`${__dirname}/assets/generated_images/${imageName}.jpg`);
-        });
+        } else {
+            res.status(404).send('not found');
+        }
     });
 
     app.get('/get-image/:userID', (req, res) => {
@@ -105,22 +114,21 @@ createConnection({
             if (user) {
                 imageRepository.findOne({ id: user.image.id }).then(image => {
                     if (image) {
-                        const i = fs.readFileSync(`${__dirname}/assets/generated_images/${image.image}.jpg`);
-                        const base64Image = Buffer.from(i).toString('base64');
-                        res.json({
-                            image: base64Image,
-                            name: `${image.image}.jpg`
-                        });
+                        res.download(`${__dirname}/assets/generated_images/${image.image}.jpg`, image.image)
                     }
+                }).catch(err => {
+                    res.status(404).send(`image not found: ${err}`);
                 })
             }
-        });
+        }).catch(err => {
+            res.status(404).send(`user not found: ${err}`);
+        })
     });
 
     app.use(express.static(__dirname));
 
-    app.listen(process.env.PORT || 5050, () => {
-        console.log(`⚡️[server]: Server is running at https://localhost:${process.env.PORT || 5050}`);
+    app.listen(process.env.PORT || 7070, () => {
+        console.log(`⚡️[server]: Server is running at https://localhost:${process.env.PORT || 7070}`);
     });
 }).catch(err => {
     console.log('could not connect to the db', err);

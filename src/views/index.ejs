@@ -16,9 +16,9 @@
 
         .ldio-47tw07u2xzp div {
             position: absolute;
-            width: 60px;
-            height: 60px;
-            border: 10px solid #5c4e9e;
+            width: 30px;
+            height: 30px;
+            border: 5px solid #5c4e9e;
             border-top-color: transparent;
             border-radius: 50%;
         }
@@ -102,6 +102,10 @@
 
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-129708290-13"></script>
+    <script async defer crossorigin="anonymous"
+        src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v8.0&appId=258462088793427&autoLogAppEvents=1"
+        nonce="I1P0i5Wf"></script>
+    <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
         function gtag() { dataLayer.push(arguments); }
@@ -118,7 +122,9 @@
         <span>Shared histories: <span style="font-weight: bold;"><%= generationCount %></span></span>
         <span class="flex">
             Social share
-            <a href="#share-fb" style="padding: 10px; margin-left: 10px;" class="share-icon">
+            <a data-href="https://kia.beat.az/" style="padding: 10px; margin-left: 10px;" class="share-icon"
+                href="https://www.facebook.com/sharer/sharer.php?u=https://kia.beat.az/&amp;src=sdkpreparse"
+                target="_blank">
                 <svg width="11px" height="23px" viewBox="0 0 11 23" version="1.1" xmlns="http://www.w3.org/2000/svg"
                     xmlns:xlink="http://www.w3.org/1999/xlink">
                     <title>Facebook</title>
@@ -133,7 +139,7 @@
             </a>
             <a target="_blank" href="https://twitter.com/share?ref_src=twsrc%5Etfw" style="padding: 10px;"
                 class="share-icon" data-text="Shareyour history!" data-url="https://kia.beat.az/"
-                data-hashtags="KarabakhisAzerbaijan" data-show-count="false">
+                data-hashtags="KarabakhisAzerbaijan" data-via data-hashtags data-related>
                 <svg width="21px" height="18px" viewBox="0 0 21 18" version="1.1" xmlns="http://www.w3.org/2000/svg"
                     xmlns:xlink="http://www.w3.org/1999/xlink">
                     <title>Twitter</title>
@@ -146,7 +152,6 @@
                     </g>
                 </svg>
             </a>
-            <!-- <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script> -->
         </span>
     </header>
     <section class="center">
