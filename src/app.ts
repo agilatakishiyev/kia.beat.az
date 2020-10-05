@@ -91,7 +91,8 @@ createConnection({
                     userRepostiory.save(user);
                 }
             });
-            res.sendStatus(200);
+            res.download(`${__dirname}/assets/generated_images/${imageName}.jpg`);
+            // res.sendStatus(200);
         });
     });
 
@@ -102,8 +103,7 @@ createConnection({
             if (user) {
                 imageRepository.findOne({ id: user.image.id }).then(image => {
                     if (image) {
-                        // res.download(`${__dirname}/assets/generated_images/${image.image}.jpg`, `${__dirname}/assets/generated_images/${image.image}.jpg`)
-                        res.download(`${__dirname}/assets/generated_images/image.jpg`, `${__dirname}/assets/generated_images/image.jpg`)
+                        res.download(`${__dirname}/assets/generated_images/${image.image}.jpg`, `${__dirname}/assets/generated_images/${image.image}.jpg`)
                     }
                 })
             }
