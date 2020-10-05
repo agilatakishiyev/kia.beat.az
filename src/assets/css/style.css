@@ -101,6 +101,12 @@ body {
     transition: 1s cubic-bezier(0.17, 0.67, 0.12, 0.99);
 }
 
+@media only screen and (max-width: 600px) {
+    .center {
+        top: 30%;
+    }
+}
+
 .center.to-top {
     top: 8%;
 }
@@ -121,6 +127,19 @@ body {
 .center__form {
     width: 33.75%;
     font-family: "fnt-1-roman";
+}
+
+@media only screen and (max-width: 500px) {
+    .center__form {
+        flex-direction: column;
+        width: initial;
+    }
+
+    .center__form input,
+    .center__form button {
+        margin: 0 !important;
+        margin: 10px auto !important;
+    }
 }
 
 .center__form>* {
