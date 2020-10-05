@@ -83,7 +83,13 @@ createConnection({
 
         nodeHtmlToImage({
             output: `${__dirname}/assets/generated_images/${imageName}.jpg`,
-            html
+            html,
+            puppeteerArgs: {
+                args: [
+                    '--no-sandbox',
+                    '--disable-setuid-sandbox',
+                ]
+            }
         }).then(() => {
             res.sendStatus(200);
         });
