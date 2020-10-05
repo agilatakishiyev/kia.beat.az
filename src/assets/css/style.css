@@ -103,7 +103,8 @@ body {
 
 @media only screen and (max-width: 600px) {
     .center {
-        top: 30%;
+        position: relative;
+        top: initial;
     }
 }
 
@@ -114,7 +115,7 @@ body {
 
 @media only screen and (max-width: 600px) {
     .center.to-top {
-        top: 15%;
+        top: initial;
     }
 }
 
@@ -197,6 +198,7 @@ body {
 @media only screen and (max-width: 600px) {
     .center .center__karabakh-text {
         font-size: 30px;
+        margin-bottom: 23px;
     }
 }
 
@@ -213,6 +215,13 @@ body {
     z-index: 9999999;
 }
 
+@media only screen and (max-width: 600px) {
+    .generate {
+        position: relative;
+        top: initial;
+    }
+}
+
 @media only screen and (max-width: 1000px) {
     .generate {
         width: 80%;
@@ -220,6 +229,7 @@ body {
 }
 
 .generate.not-shown {
+    height: 0;
     opacity: 0;
     visibility: hidden;
 }
@@ -289,7 +299,9 @@ footer {
 
 @media only screen and (max-width: 600px) {
     footer {
-        bottom: 3%;
+        margin-top: 30px;
+        position: relative;
+        bottom: initial;
     }
 }
 
