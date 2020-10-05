@@ -114,7 +114,7 @@ createConnection({
             if (user) {
                 imageRepository.findOne({ id: user.image.id }).then(image => {
                     if (image) {
-                        res.download(`${__dirname}/assets/generated_images/${image.image}.jpg`, image.image)
+                        res.download(`${__dirname}/assets/generated_images/${image.image}.jpg`, `${image.image}.jpg`)
                     }
                 }).catch(err => {
                     res.status(404).send(`image not found: ${err}`);
@@ -127,8 +127,8 @@ createConnection({
 
     app.use(express.static(__dirname));
 
-    app.listen(process.env.PORT || 7070, () => {
-        console.log(`⚡️[server]: Server is running at https://localhost:${process.env.PORT || 7070}`);
+    app.listen(process.env.PORT || 9090, () => {
+        console.log(`⚡️[server]: Server is running at https://localhost:${process.env.PORT || 9090}`);
     });
 }).catch(err => {
     console.log('could not connect to the db', err);

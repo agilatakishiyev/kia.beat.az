@@ -102,10 +102,6 @@
 
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-129708290-13"></script>
-    <script async defer crossorigin="anonymous"
-        src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v8.0&appId=258462088793427&autoLogAppEvents=1"
-        nonce="I1P0i5Wf"></script>
-    <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
         function gtag() { dataLayer.push(arguments); }
@@ -119,40 +115,8 @@
 
 <body>
     <header class="header flex">
+        <span>#shareyourhistory</span>
         <span>Shared histories: <span style="font-weight: bold;"><%= generationCount %></span></span>
-        <span class="flex">
-            Social share
-            <a data-href="https://kia.beat.az/" style="padding: 10px; margin-left: 10px;" class="share-icon"
-                href="https://www.facebook.com/sharer/sharer.php?u=https://kia.beat.az/&amp;src=sdkpreparse"
-                target="_blank">
-                <svg width="11px" height="23px" viewBox="0 0 11 23" version="1.1" xmlns="http://www.w3.org/2000/svg"
-                    xmlns:xlink="http://www.w3.org/1999/xlink">
-                    <title>Facebook</title>
-                    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                        <g id="District-selected" transform="translate(-1272.000000, -150.000000)" fill="#000000">
-                            <path
-                                d="M1279.31471,173 L1274.43724,173 L1274.43724,161.498548 L1272,161.498548 L1272,157.535534 L1274.43724,157.535534 L1274.43724,155.156274 C1274.43724,151.923441 1275.81271,150 1279.72302,150 L1282.97765,150 L1282.97765,153.964466 L1280.94351,153.964466 C1279.42126,153.964466 1279.32067,154.518272 1279.32067,155.551849 L1279.31396,157.535534 L1283,157.535534 L1282.56858,161.498548 L1279.31396,161.498548 L1279.31396,173 L1279.31471,173 Z"
-                                id="Facebook"></path>
-                        </g>
-                    </g>
-                </svg>
-            </a>
-            <a target="_blank" href="https://twitter.com/share?ref_src=twsrc%5Etfw" style="padding: 10px;"
-                class="share-icon" data-text="Shareyour history!" data-url="https://kia.beat.az/"
-                data-hashtags="KarabakhisAzerbaijan" data-via data-hashtags data-related>
-                <svg width="21px" height="18px" viewBox="0 0 21 18" version="1.1" xmlns="http://www.w3.org/2000/svg"
-                    xmlns:xlink="http://www.w3.org/1999/xlink">
-                    <title>Twitter</title>
-                    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                        <g id="District-selected" transform="translate(-1299.000000, -153.000000)" fill="#000000">
-                            <path
-                                d="M1317.52615,155.845732 C1318.41609,155.284125 1319.09896,154.393615 1319.41944,153.332804 C1318.58619,153.854109 1317.66543,154.231114 1316.68304,154.435216 C1315.8991,153.551206 1314.77866,153 1313.53865,153 C1311.15971,153 1309.23191,155.034523 1309.23191,157.54355 C1309.23191,157.899754 1309.26765,158.246858 1309.34161,158.578362 C1305.76211,158.38856 1302.58813,156.58154 1300.46188,153.830709 C1300.09086,154.504117 1299.87885,155.284125 1299.87885,156.116135 C1299.87885,157.691752 1300.63937,159.082768 1301.79556,159.899177 C1301.08928,159.875776 1300.4249,159.669074 1299.84311,159.33107 L1299.84311,159.386971 C1299.84311,161.589195 1301.32717,163.426116 1303.30058,163.84212 C1302.93819,163.948722 1302.55855,164.002022 1302.16411,164.002022 C1301.88678,164.002022 1301.6156,163.974722 1301.35429,163.921421 C1301.90157,165.725841 1303.49287,167.041456 1305.37876,167.076556 C1303.90333,168.29597 1302.04578,169.021378 1300.028,169.021378 C1299.6804,169.021378 1299.3365,169.001878 1299,168.958977 C1300.90685,170.247292 1303.17116,171 1305.60433,171 C1313.53002,171 1317.86142,164.076123 1317.86142,158.071356 C1317.86142,157.873754 1317.85895,157.677452 1317.85033,157.48375 C1318.6922,156.842843 1319.42437,156.042034 1320,155.130724 C1319.22715,155.492128 1318.39637,155.73653 1317.52615,155.845732 Z"
-                                id="Twitter"></path>
-                        </g>
-                    </g>
-                </svg>
-            </a>
-        </span>
     </header>
     <section class="center">
         <span class="center__flag">
@@ -179,14 +143,15 @@
                 <div class="custom-select">
                     <div class="custom-select__trigger"><span>Choose district</span>
                         <div class="arrow">
-                            <img src="../assets/images/arrow-down.svg" alt="">
+                            <img src="../assets/images/arrow-down.svg" alt="arrow down image">
                         </div>
                     </div>
                     <div class="custom-options">
                         <span class="custom-option" data-value="aghdam">Aghdam</span>
                         <span class="custom-option" data-value="aghdara">Aghdara</span>
-                        <span class="custom-option" data-value="Fuzuli">Fuzuli</span>
+                        <span class="custom-option" data-value="fuzuli">Fuzuli</span>
                         <span class="custom-option" data-value="gubadli">Gubadli</span>
+                        <span class="custom-option" data-value="jabrayil">Jabrayil</span>
                         <span class="custom-option" data-value="kalbajar">Kalbajar</span>
                         <span class="custom-option" data-value="khojaly">Khojaly</span>
                         <span class="custom-option" data-value="khojavend">Khojavend</span>

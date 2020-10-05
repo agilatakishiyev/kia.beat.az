@@ -2,6 +2,7 @@ window.addEventListener('DOMContentLoaded', function () {
     let isNameInputFilled = false;
     let isSurNameInputFilled = false;
     let sendingRequest = false;
+    const downloadImageButton = document.getElementById('download');
     const mainForm = document.getElementById('main-form');
     const nameInput = document.getElementById('name-input');
     const surnameInput = document.getElementById('surname-input')
@@ -10,12 +11,10 @@ window.addEventListener('DOMContentLoaded', function () {
     const currentUser = sessionStorage.getItem('user');
 
     if(currentUser) {
-        document.querySelector('.generate__button__open-image-text').setAttribute('data-file-link', `/get-image/${JSON.parse(currentUser).userID}`)
         mainForm.classList.add('d-none');
         centerSection.classList.add('to-top');
         generateSection.classList.remove('not-shown');
     }
-
 
     function checkAndActivate () {
         if(isNameInputFilled && isSurNameInputFilled) {
@@ -37,7 +36,7 @@ window.addEventListener('DOMContentLoaded', function () {
 
     function capitalizeFirstLetter(string) {
         if(typeof string==undefined) return;
-        var firstLetter = string[0] || string.charAt(0);
+        let firstLetter = string[0] || string.charAt(0);
         return firstLetter  ? firstLetter.toUpperCase() + string.substr(1) : '';
      }
 
@@ -56,7 +55,6 @@ window.addEventListener('DOMContentLoaded', function () {
             .then(res => res.json())
             .then(res => {
                 if(res) {
-                    document.querySelector('.generate__button__open-image-text').setAttribute('href', `/get-image/${res.userID}`)
                     sessionStorage.setItem('user', JSON.stringify(res));
                     mainForm.classList.add('d-none');
                     centerSection.classList.add('to-top');
@@ -128,49 +126,25 @@ window.addEventListener('DOMContentLoaded', function () {
         }
     });
 
-    document.querySelector('.generate__button__open-image-text').onclick = function (e) {
+    document.querySelector('.generate__button__open-image-text').onclick = function () {
         this.querySelector('span').classList.add('d-none');
         this.querySelector('.save-loader').classList.remove('d-none');
     }
 
-    function log() {
-        document.getElementById('download').querySelector('span').classList.remove('d-none');
-        document.getElementById('download').querySelector('.save-loader').classList.add('d-none');
+    function removeLoading() {
+        downloadImageButton.querySelector('span').classList.remove('d-none');
+        downloadImageButton.querySelector('.save-loader').classList.add('d-none');
     }
       
-    // function download(file, callback) {
-    //     var request = new XMLHttpRequest();
-    //     request.responseType = 'json';
-    //     request.open('GET', file);
-    //     request.addEventListener('load', function () {
-    //         callback(request.response);
-    //     });
-    //     request.send();
-    // }
-      
-    // function save(object, name) {
-    //     var a = document.createElement('a');
-    //     a.href = `data:image/jpg;base64,${object}`;
-    //     a.download = name;
-    //     a.click();
-    //     setTimeout(
-    //         () => {
-    //             log();
-    //         }, 
-    //         3000
-    //     );
-    // }
-      
-    document.querySelector('#download').addEventListener('click', function () {
-        
+    downloadImageButton.addEventListener('click', function () {
         var a = document.createElement('a');
         a.href = `/get-image/${JSON.parse(sessionStorage.getItem('user')).userID}`;
         a.setAttribute('download', 'true');
+        a.setAttribute('target', '_blank');
         a.click();
-        log();
-        // download(`get-image/${JSON.parse(sessionStorage.getItem('user')).userID}`, function (response) {
-        //     save(response.image, response.name);
-        // });
+        setTimeout(() => {
+            removeLoading();
+        }, 3000);
     });
 });
 

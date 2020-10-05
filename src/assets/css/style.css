@@ -65,6 +65,7 @@ body {
 
 .header {
     width: 76%;
+    padding-top: 150px;
     margin: 0 auto;
     font-family: "fnt-1-italic";
     font-size: 18px;
@@ -75,6 +76,10 @@ body {
         position: relative;
         left: 0;
         margin-bottom: 40px;
+    }
+
+    .header span:first-child {
+        margin-bottom: 10px;
     }
 }
 
@@ -150,7 +155,7 @@ body {
     }
 }
 
-.center__form > * {
+.center__form>* {
     border-radius: 10px;
 }
 
@@ -182,7 +187,7 @@ body {
     cursor: pointer;
 }
 
-.center > span {
+.center>span {
     display: block;
 }
 
@@ -264,12 +269,12 @@ body {
     }
 }
 
-.generate > div {
+.generate>div {
     margin-top: 40px;
 }
 
 @media only screen and (max-width: 600px) {
-    .generate > div {
+    .generate>div {
         margin-top: 20px;
     }
 }
@@ -296,6 +301,7 @@ body {
 }
 
 @media only screen and (max-width: 600px) {
+
     .generate .generate__button,
     #download {
         margin-top: 30px;
@@ -333,7 +339,7 @@ footer {
         margin-top: 60px;
         margin-bottom: 30px;
         position: relative;
-        bottom: initial;
+        bottom: 30px;
     }
 }
 
