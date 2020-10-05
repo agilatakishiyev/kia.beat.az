@@ -105,7 +105,12 @@ createConnection({
             if (user) {
                 imageRepository.findOne({ id: user.image.id }).then(image => {
                     if (image) {
-                        res.download(`${__dirname}/assets/generated_images/${image.image}.jpg`, `${__dirname}/assets/generated_images/${image.image}.jpg`)
+                        const i = fs.readFileSync(`${__dirname}/assets/generated_images/${image.image}.jpg`);
+                        const base64Image = Buffer.from(i).toString('base64');
+                        res.json({
+                            image: base64Image,
+                            name: `${image.image}.jpg`
+                        });
                     }
                 })
             }
@@ -114,8 +119,8 @@ createConnection({
 
     app.use(express.static(__dirname));
 
-    app.listen(process.env.PORT || 3000, () => {
-        console.log(`⚡️[server]: Server is running at https://localhost:${process.env.PORT || 3000}`);
+    app.listen(process.env.PORT || 5050, () => {
+        console.log(`⚡️[server]: Server is running at https://localhost:${process.env.PORT || 5050}`);
     });
 }).catch(err => {
     console.log('could not connect to the db', err);

@@ -10,7 +10,7 @@ window.addEventListener('DOMContentLoaded', function () {
     const currentUser = localStorage.getItem('user');
 
     if(currentUser) {
-        document.querySelector('.generate__button__open-image-text').setAttribute('href', `/get-image/${JSON.parse(currentUser).userID}`)
+        document.querySelector('.generate__button__open-image-text').setAttribute('data-file-link', `/get-image/${JSON.parse(currentUser).userID}`)
         mainForm.classList.add('d-none');
         centerSection.classList.add('to-top');
         generateSection.classList.remove('not-shown');
@@ -75,7 +75,7 @@ window.addEventListener('DOMContentLoaded', function () {
     const generateButton = document.querySelector('.generate__button');
     const generateButtonLoader = generateButton.querySelector('.generate-loader');
     generateButton.onclick = function () {
-        if(generateButton.querySelector('.generate__button__open-image-text').classList.contains('d-none')){
+        if(document.getElementById('download').classList.contains('d-none')){
             generateButton.querySelector('.generate__button__text').classList.add('d-none');
             generateButtonLoader.classList.remove('d-none');
             const user  = JSON.parse(localStorage.getItem('user'));
@@ -95,8 +95,8 @@ window.addEventListener('DOMContentLoaded', function () {
                     })
                 })
                 .then(res => {
-                    generateButtonLoader.classList.add('d-none');
-                    generateButton.querySelector(".generate__button__open-image-text").classList.remove("d-none");
+                    generateButton.classList.add('d-none');
+                    document.getElementById('download').classList.remove('d-none');
                 });
             }
         }
@@ -113,8 +113,10 @@ window.addEventListener('DOMContentLoaded', function () {
                 this.closest('.custom-select').querySelector('.custom-select__trigger span').textContent = this.textContent;
             }
             generateButton.removeAttribute('disabled');
+            generateButton.classList.remove('d-none');
+            generateButtonLoader.classList.add('d-none');
             generateButton.querySelector('.generate__button__text').classList.remove('d-none');
-            generateButton.querySelector('.generate__button__open-image-text').classList.add('d-none');
+            document.getElementById('download').classList.add('d-none');
             sendingRequest = false;
         })
     }
@@ -127,10 +129,40 @@ window.addEventListener('DOMContentLoaded', function () {
     });
 
     document.querySelector('.generate__button__open-image-text').onclick = function (e) {
-        console.log(e);
         this.querySelector('span').classList.add('d-none');
         this.querySelector('.save-loader').classList.remove('d-none');
     }
+
+    function log() {
+        document.getElementById('download').querySelector('span').classList.remove('d-none');
+        document.getElementById('download').querySelector('.save-loader').classList.add('d-none');
+    }
+      
+    function download(file, callback) {
+        var request = new XMLHttpRequest();
+        request.responseType = 'json';
+        setTimeout(() => {
+            log();
+        }, 1000);
+        request.open('GET', file);
+        request.addEventListener('load', function () {
+            callback(request.response);
+        });
+        request.send();
+    }
+      
+    function save(object, mime, name) {
+        var a = document.createElement('a');
+        a.href = `data:image/png;base64,${object}`;
+        a.download = name;
+        a.click();
+    }
+      
+    document.querySelector('#download').addEventListener('click', function () {
+        download(`get-image/${JSON.parse(localStorage.getItem('user')).userID}`, function (response) {
+            save(response.image, null, response.name);
+        });
+    });
 });
 
 window.onload = function () {
