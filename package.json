@@ -9,7 +9,7 @@
         "install-puppeteer": "export PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true && npm install -g puppeteer",
         "minify-css": "csso ./src/assets/css/style.css --output ./src/assets/css/style.min.css",
         "minify-js": "uglifyjs ./src/assets/js/main.js -o ./src/assets/js/main.min.js",
-        "build": "npm run install-puppeteer && tsc -p .",
+        "build": "tsc -p .",
         "tsc": "tsc"
     },
     "dependencies": {
@@ -27,6 +27,7 @@
         "node-html-to-image": "3.0.0",
         "nodemon": "2.0.4",
         "pg": "^8.3.3",
+        "puppeteer": "^5.3.1",
         "reflect-metadata": "^0.1.13",
         "ts-node": "9.0.0",
         "typeorm": "0.2.25",
