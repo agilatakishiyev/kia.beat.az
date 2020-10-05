@@ -67,19 +67,6 @@ createConnection({
         const html: string = await ejs.renderFile(`${__dirname}/assets/template.ejs`, { ...data, imageURI }, { async: true });
 
         const imageName = `${data.user.userID}-${uuidv4()}`;
-        const newImage = new Image();
-        newImage.image = imageName;
-        newImage.date = new Date();
-        const imageRepository = connection.getRepository(Image);
-        await imageRepository.save(newImage);
-        const userRepostiory = connection.getRepository(User);
-
-        userRepostiory.findOne(data.user.userID).then(user => {
-            if (user) {
-                user.image = newImage;
-                userRepostiory.save(user);
-            }
-        });
 
         nodeHtmlToImage({
             output: `${__dirname}/assets/generated_images/${imageName}.jpg`,
@@ -90,7 +77,20 @@ createConnection({
                     '--disable-setuid-sandbox',
                 ]
             }
-        }).then(() => {
+        }).then(async () => {
+            const newImage = new Image();
+            newImage.image = imageName;
+            newImage.date = new Date();
+            const imageRepository = connection.getRepository(Image);
+            await imageRepository.save(newImage);
+            const userRepostiory = connection.getRepository(User);
+
+            userRepostiory.findOne(data.user.userID).then(user => {
+                if (user) {
+                    user.image = newImage;
+                    userRepostiory.save(user);
+                }
+            });
             res.sendStatus(200);
         });
     });
