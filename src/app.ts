@@ -20,12 +20,12 @@ async function getImagesCount (connection: Connection): Promise<number> {
 
 createConnection({
     type: 'postgres',
-    // url: process.env.DATABASE_URL,
-    host: "localhost",
-    port: 5433,
-    username: "",
-    password: "",
-    database: "kia",
+    url: process.env.DATABASE_URL,
+    // host: "localhost",
+    // port: 5433,
+    // username: "",
+    // password: "",
+    // database: "kia",
     entities: [
         User,
         Image
