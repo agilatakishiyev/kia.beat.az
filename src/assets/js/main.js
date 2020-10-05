@@ -73,7 +73,7 @@ window.addEventListener('DOMContentLoaded', function () {
     });
 
     const generateButton = document.querySelector('.generate__button');
-    const generateButtonLoader = generateButton.querySelector('.loadingio-spinner-rolling-mu8b1dshy5');
+    const generateButtonLoader = generateButton.querySelector('.generate-loader');
     generateButton.onclick = function () {
         if(generateButton.querySelector('.generate__button__open-image-text').classList.contains('d-none')){
             generateButton.querySelector('.generate__button__text').classList.add('d-none');
@@ -125,6 +125,12 @@ window.addEventListener('DOMContentLoaded', function () {
             select.classList.remove('open');
         }
     });
+
+    document.querySelector('.generate__button__open-image-text').onclick = function (e) {
+        console.log(e);
+        this.querySelector('span').classList.add('d-none');
+        this.querySelector('.save-loader').classList.remove('d-none');
+    }
 });
 
 window.onload = function () {

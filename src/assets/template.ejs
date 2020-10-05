@@ -4,18 +4,18 @@
     <link rel="stylesheet" href="./css/style.css">
     <style>
         @font-face {
-            font-family: 'fnt-2-medium';
-            src: url('./fonts/gilroy/Gilroy-Medium.otf');
+            font-family: fnt-2-medium;
+            src: url("./fonts/gilroy/Gilroy-Medium.woff");
         }
     </style>
 </head>
 
 <body>
     <div style="position: relative;">
-        <img style="width: 100%; object-fit: cover;" src="<%= imageURI %>"
+        <img style="width: 100%;" src="<%= imageURI %>"
             alt="Azerbaijani region <%= city %> region is occupied by armenian">
         <span
-            style="position: absolute; bottom: 161px; left: 83px; font-size: 20pt; font-family: 'fnt-2-medium'; color: #424242">
+            style="position: absolute; bottom: 161px; left: 83px; font-size: 20pt; font-family: fnt-2-medium, Gilroy-Medium; color: #424242">
             Created by <%= user.name %> <%= user.surname %>
         </span>
     </div>

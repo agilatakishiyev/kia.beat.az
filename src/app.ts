@@ -6,6 +6,8 @@ import { Image } from "./entities/Image";
 import { v4 as uuidv4 } from 'uuid';
 import ejs from "ejs";
 import fs from "fs";
+
+var enforce = require('express-sslify');
 const nodeHtmlToImage = require("node-html-to-image");
 
 async function getImagesCount (connection: Connection): Promise<number> {
@@ -39,6 +41,7 @@ createConnection({
         type: 'application/json'
     }));
     app.use(express.urlencoded({ extended: false }));
+    app.use(enforce.HTTPS({ trustProtoHeader: true }));
 
     app.set('view engine', 'ejs');
     app.set("views", "src/views");
@@ -92,7 +95,6 @@ createConnection({
                 }
             });
             res.download(`${__dirname}/assets/generated_images/${imageName}.jpg`);
-            // res.sendStatus(200);
         });
     });
 
@@ -112,8 +114,8 @@ createConnection({
 
     app.use(express.static(__dirname));
 
-    app.listen(process.env.PORT || 8000, () => {
-        console.log(`⚡️[server]: Server is running at https://localhost:${process.env.PORT || 8000}`);
+    app.listen(process.env.PORT || 3000, () => {
+        console.log(`⚡️[server]: Server is running at https://localhost:${process.env.PORT || 3000}`);
     });
 }).catch(err => {
     console.log('could not connect to the db', err);
