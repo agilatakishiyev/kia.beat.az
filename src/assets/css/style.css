@@ -73,7 +73,7 @@ body {
 
 @media only screen and (max-width: 1050px) {
     .header {
-        padding-top: 50px;
+        padding-top: 30px;
     }
 }
 
@@ -188,6 +188,13 @@ body {
     margin-bottom: 43px;
 }
 
+@media only screen and (max-width: 600px) {
+    .center .center__flag {
+        margin-bottom: 23px;
+        margin-top: 20px;
+    }
+}
+
 .center .center__karabakh-text {
     font-family: "fnt-1";
     font-size: 40px;
@@ -229,9 +236,9 @@ body {
 }
 
 .generate.not-shown {
-    height: 0;
     opacity: 0;
     visibility: hidden;
+    display: none;
 }
 
 .generate h1 {
@@ -250,6 +257,12 @@ body {
     margin-top: 40px;
 }
 
+@media only screen and (max-width: 600px) {
+    .generate>div {
+        margin-top: 20px;
+    }
+}
+
 .generate div {
     font-size: 40px;
     line-height: 60px;
@@ -258,6 +271,7 @@ body {
 @media only screen and (max-width: 600px) {
     .generate div {
         font-size: 30px;
+        line-height: 30px;
     }
 }
 
@@ -305,6 +319,7 @@ footer {
 @media only screen and (max-width: 600px) {
     footer {
         margin-top: 30px;
+        margin-bottom: 30px;
         position: relative;
         bottom: initial;
     }
