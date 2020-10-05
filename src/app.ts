@@ -20,12 +20,12 @@ async function getImagesCount (connection: Connection): Promise<number> {
 
 createConnection({
     type: 'postgres',
-    url: process.env.DATABASE_URL,
-    // host: "localhost",
-    // port: 5433,
-    // username: "",
-    // password: "",
-    // database: "kia",
+    // url: process.env.DATABASE_URL,
+    host: "localhost",
+    port: 5433,
+    username: "",
+    password: "",
+    database: "kia",
     entities: [
         User,
         Image
@@ -61,15 +61,15 @@ createConnection({
 
     app.post('/generate', async (req, res) => {
         const data = req.body;
-        const image = fs.readFileSync(`${__dirname}/assets/map_images/${data.city.toLowerCase()}.jpg`);
+        const image = fs.readFileSync(`./assets/map_images/${data.city.toLowerCase()}.jpg`);
         const base64Image = Buffer.from(image).toString('base64');
         const imageURI = 'data:image/jpeg;base64,' + base64Image;
-        const html: string = await ejs.renderFile(`${__dirname}/assets/template.ejs`, { ...data, imageURI }, { async: true });
+        const html: string = await ejs.renderFile(`./assets/template.ejs`, { ...data, imageURI }, { async: true });
 
         const imageName = `${data.user.userID}-${uuidv4()}`;
 
         nodeHtmlToImage({
-            output: `${__dirname}/assets/generated_images/${imageName}.jpg`,
+            output: `./assets/generated_images/${imageName}.jpg`,
             html,
             puppeteerArgs: {
                 args: [
@@ -102,7 +102,7 @@ createConnection({
             if (user) {
                 imageRepository.findOne({ id: user.image.id }).then(image => {
                     if (image) {
-                        res.download(`${__dirname}/assets/generated_images/${image.image}.jpg`, `${__dirname}/assets/generated_images/${image.image}.jpg`)
+                        res.download(`./assets/generated_images/${image.image}.jpg`, `./assets/generated_images/${image.image}.jpg`)
                     }
                 })
             }
