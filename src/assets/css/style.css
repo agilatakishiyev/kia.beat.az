@@ -126,6 +126,12 @@ body {
     }
 }
 
+@media only screen and (max-width: 600px) {
+    .center.to-top {
+        margin-bottom: 0;
+    }
+}
+
 .center__form input,
 .center__form button {
     padding-top: 14px;
@@ -134,11 +140,14 @@ body {
 
 .center__form {
     margin: 0 auto;
-    width: 33.75%;
     font-family: "fnt-1-roman";
 }
 
 @media only screen and (max-width: 600px) {
+    .center {
+        padding-top: 0;
+    }
+
     .center__form {
         flex-direction: column;
         width: initial;
