@@ -101,8 +101,13 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    /* height: calc(100vh - 172px); */
     min-height: 750px;
+}
+
+@media only screen and (max-width: 600px) {
+    .main {
+        min-height: 500px;
+    }
 }
 
 .center {
@@ -325,7 +330,7 @@ footer {
 
 @media only screen and (max-width: 600px) {
     footer {
-        margin-top: 90px;
+        margin-top: 40px;
         padding-top: 0;
     }
 }
