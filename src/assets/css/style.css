@@ -155,7 +155,7 @@ body {
     }
 }
 
-.center__form > * {
+.center__form>* {
     border-radius: 10px;
 }
 
@@ -187,7 +187,7 @@ body {
     cursor: pointer;
 }
 
-.center > span {
+.center>span {
     display: block;
 }
 
@@ -269,12 +269,12 @@ body {
     }
 }
 
-.generate > div {
+.generate>div {
     margin-top: 40px;
 }
 
 @media only screen and (max-width: 600px) {
-    .generate > div {
+    .generate>div {
         margin-top: 20px;
     }
 }
@@ -301,6 +301,7 @@ body {
 }
 
 @media only screen and (max-width: 600px) {
+
     .generate .generate__button,
     #download {
         margin-top: 30px;
@@ -336,7 +337,6 @@ footer {
 @media only screen and (max-width: 600px) {
     footer {
         margin-top: 90px;
-        margin-bottom: 30px;
         position: relative;
         bottom: 30px;
     }
