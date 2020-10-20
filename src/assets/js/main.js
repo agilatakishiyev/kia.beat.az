@@ -102,7 +102,11 @@ window.addEventListener('DOMContentLoaded', function () {
 
 
     for (const option of document.querySelectorAll(".custom-option")) {
-        option.addEventListener('click', function() {
+        option.addEventListener('click', function(e) {
+            if(this.classList.contains('returned')) {
+                e.stopPropagation();
+                return;
+            }
             if (!this.classList.contains('selected')) {
                 if(this.parentNode.querySelector('.custom-option.selected')) {
                     this.parentNode.querySelector('.custom-option.selected').classList.remove('selected');
@@ -120,7 +124,8 @@ window.addEventListener('DOMContentLoaded', function () {
     }
 
     window.addEventListener('click', function(e) {
-        const select = document.querySelector('.custom-select')
+        const select = document.querySelector('.custom-select');
+
         if (!select.contains(e.target)) {
             select.classList.remove('open');
         }
